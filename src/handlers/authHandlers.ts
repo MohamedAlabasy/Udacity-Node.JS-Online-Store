@@ -8,8 +8,7 @@ const newUser = new UserModels()
 // #			                            Register                                       #
 // #=======================================================================================#
 export const register = async (request: Request, response: Response, next: NextFunction) => {
-    validateRequest(request);
-    await newUser.register(request.body)
+    await newUser.register(request)
         .then(userData => {
             response.json({
                 status: 1,
@@ -28,8 +27,7 @@ export const register = async (request: Request, response: Response, next: NextF
 // #			                            login                                          #
 // #=======================================================================================#
 export const login = async (request: Request, response: Response, next: NextFunction) => {
-    validateRequest(request);
-    await newUser.login(request.body)
+    await newUser.login(request)
         .then(userData => {
             response.json({
                 status: 1,
@@ -49,8 +47,7 @@ export const login = async (request: Request, response: Response, next: NextFunc
 // #			                       get User by id                                      #
 // #=======================================================================================#
 export const getUserByID = async (request: Request, response: Response, next: NextFunction) => {
-    validateRequest(request);
-    await newUser.getUserByID(request.params.id)
+    await newUser.getUserByID(request)
         .then(userData => {
             response.json({
                 status: 1,
@@ -71,8 +68,7 @@ export const getUserByID = async (request: Request, response: Response, next: Ne
 // #			                            logout                                         #
 // #=======================================================================================#
 export const logout = async (request: Request, response: Response, next: NextFunction) => {
-    validateRequest(request);
-    await newUser.logout(request.params.id)
+    await newUser.logout(request)
         .then(_ => {
             response.json({
                 status: 1,

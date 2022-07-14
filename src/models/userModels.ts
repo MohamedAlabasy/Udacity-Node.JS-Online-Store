@@ -1,7 +1,10 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { Request } from 'express';
 
 import Client from '../database';
+import validateRequest from '../utilities/validateRequest';
+
 
 export type users = {
     id: number,
@@ -16,35 +19,37 @@ export class UserModels {
     // #=======================================================================================#
     // #			                            Register                                       #
     // #=======================================================================================#
-    async register(newUser: users): Promise<users> {
+    async register(request: Request): Promise<users> {
+        validateRequest(request);
         try {
-            const hashPassword = bcrypt.hashSync(newUser.password, 10);
+            const hashPassword = bcrypt.hashSync(request.body.password, 10);
             const sqlQuery = 'INSERT INTO users (email,first_name, last_name, password,token) VALUES($1, $2, $3,$4,null) RETURNING *'
             const DBConnection = await Client.connect()
-            const result = await DBConnection.query(sqlQuery, [newUser.email.toLocaleLowerCase(), newUser.first_name, newUser.last_name, hashPassword])
+            const result = await DBConnection.query(sqlQuery, [request.body.email.toLocaleLowerCase(), request.body.first_name, request.body.last_name, hashPassword])
             const user = result.rows[0]
             DBConnection.release()
             return user
         } catch (error) {
-            throw new Error(`Couldn't add ${newUser.first_name} ${newUser.last_name}} because Error: ${error}`)
+            throw new Error(`Couldn't add ${request.body.first_name} ${request.body.last_name}} because Error: ${error}`)
         }
     }
-
+    
     // #=======================================================================================#
     // #			                            login                                          #
     // #=======================================================================================#
-    async login(newUser: users): Promise<users> {
+    async login(request: Request): Promise<users> {
+        validateRequest(request);
         try {
             let sqlQuery = 'SELECT * FROM users WHERE email=($1)'
             const DBConnection = await Client.connect()
-            const result = await DBConnection.query(sqlQuery, [newUser.email.toLocaleLowerCase()])
+            const result = await DBConnection.query(sqlQuery, [request.body.email.toLocaleLowerCase()])
             let user = result.rows[0]
 
-            if (user === null) {
-                throw new Error(`No user with this email = ${newUser.email}`)
+            if (!user) {
+                throw new Error(`No user with this email = ${request.body.email}`)
             }
 
-            let IsValidPassword = bcrypt.compareSync(newUser.password, user.password);
+            let IsValidPassword = bcrypt.compareSync(request.body.password, user.password);
             if (!IsValidPassword) {
                 throw new Error(`invalid password`)
             } else {
@@ -58,50 +63,50 @@ export class UserModels {
             DBConnection.release();
             return user;
         } catch (error) {
-            throw new Error(`Couldn't add ${newUser.first_name} ${newUser.last_name}} because Error: ${error}`)
+            throw new Error(`Couldn't add ${request.body.first_name} ${request.body.last_name}} because Error: ${error}`)
         }
     }
-
     // #=======================================================================================#
     // #			                       get User by id                                      #
     // #=======================================================================================#
-    async getUserByID(id: string): Promise<users> {
+    async getUserByID(request: Request): Promise<users> {
+        validateRequest(request);
         try {
             let sqlQuery = 'SELECT * FROM users WHERE id=($1)'
             const DBConnection = await Client.connect()
-            const result = await DBConnection.query(sqlQuery, [id])
+            const result = await DBConnection.query(sqlQuery, [request.params.id])
             const user = result.rows[0]
             DBConnection.release();
 
-            if (user === null) {
-                throw new Error(`No user with this id = ${id}`)
+            if (!user) {
+                throw new Error(`No user with this id = ${request.params.id}`)
             }
 
             return user;
         } catch (error) {
-            throw new Error(`Couldn't find user with this id =${id} because Error: ${error}`)
+            throw new Error(`Couldn't find user with this id = ${request.params.id} because Error: ${error}`)
         }
     }
 
     // #=======================================================================================#
     // #			                               logout                                      #
     // #=======================================================================================#
-    async logout(id: string): Promise<users> {
+    async logout(request: Request): Promise<users> {
+        validateRequest(request);
         try {
             let sqlQuery = 'UPDATE users SET token = null WHERE id=($1)'
             const DBConnection = await Client.connect()
-            const result = await DBConnection.query(sqlQuery, [id]);
+            const result = await DBConnection.query(sqlQuery, [request.params.id]);
             const user = result.rows[0]
             DBConnection.release();
 
-            if (user === null) {
-                throw new Error(`No user with this id = ${id}`)
+            if (!user) {
+                throw new Error(`No user with this id = ${request.params.id}`)
             }
 
             return user;
         } catch (error) {
-            throw new Error(`Couldn't find user with this id =${id} because Error: ${error}`)
+            throw new Error(`Couldn't find user with this id =${request.params.id} because Error: ${error}`)
         }
     }
-
 }
