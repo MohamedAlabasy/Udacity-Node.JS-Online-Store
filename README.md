@@ -20,7 +20,7 @@ npm i
 
 <h3 align="center">To help you understand the project</h3>
 
-## EndPints
+## Api Endpoints
 
 <h4 align="center">user</h4>
 
