@@ -7,8 +7,8 @@ const newUser = new UserModels()
 // #=======================================================================================#
 // #			                            Register                                       #
 // #=======================================================================================#
-export const register = async (request: Request, response: Response, next: NextFunction) => {
-    await newUser.register(request)
+export const create = async (request: Request, response: Response, next: NextFunction) => {
+    await newUser.create(request)
         .then(userData => {
             response.json({
                 status: 1,
@@ -43,11 +43,12 @@ export const login = async (request: Request, response: Response, next: NextFunc
             next(error)
         })
 }
+
 // #=======================================================================================#
 // #			                       get User by id                                      #
 // #=======================================================================================#
-export const getUserByID = async (request: Request, response: Response, next: NextFunction) => {
-    await newUser.getUserByID(request)
+export const show = async (request: Request, response: Response, next: NextFunction) => {
+    await newUser.show(request)
         .then(userData => {
             response.json({
                 status: 1,
@@ -58,6 +59,30 @@ export const getUserByID = async (request: Request, response: Response, next: Ne
                     first_name: userData.first_name,
                     last_name: userData.last_name,
                 }
+            })
+        }).catch(error => {
+            next(error)
+        })
+}
+
+// #=======================================================================================#
+// #			                       get User by id                                      #
+// #=======================================================================================#
+export const index = async (request: Request, response: Response, next: NextFunction) => {
+    await newUser.index(request)
+        .then(userData => {
+            response.json({
+                status: 1,
+                count: userData.length,
+                data: userData.map((data) => {
+                    return {
+                        id: data.id,
+                        token: data.token,
+                        email: data.email,
+                        first_name: data.first_name,
+                        last_name: data.last_name,
+                    }
+                })
             })
         }).catch(error => {
             next(error)

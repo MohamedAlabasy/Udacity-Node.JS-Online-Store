@@ -4,8 +4,9 @@ import { body, param } from 'express-validator';
 
 import {
     login,
-    register,
-    getUserByID,
+    create,
+    show,
+    index,
     logout
 } from '../../handlers/authHandlers'
 import checkTokens from '../../utilities/checkTokens';
@@ -13,9 +14,13 @@ import checkTokens from '../../utilities/checkTokens';
 
 const auth: Router = Router()
 
+
+
+
 auth.post('/login', checkEmailAndPassword(), login);
-auth.post('/register', checkEmailAndPassword(), checkUserName(), register);
-auth.get('/:id', checkTokens, checkID(), getUserByID);
+auth.post('/create', checkEmailAndPassword(), checkUserName(), create);
+auth.get('/Index', checkTokens, index);
+auth.get('/show/:id', checkTokens, checkID(), show);
 auth.post('/logout/:id', checkTokens, checkID(), logout);
 
 // #=======================================================================================#

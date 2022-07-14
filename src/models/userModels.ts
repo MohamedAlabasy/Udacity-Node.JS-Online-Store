@@ -17,9 +17,9 @@ export type users = {
 
 export class UserModels {
     // #=======================================================================================#
-    // #			                            Register                                       #
+    // #			                              create                                       #
     // #=======================================================================================#
-    async register(request: Request): Promise<users> {
+    async create(request: Request): Promise<users> {
         validateRequest(request);
         try {
             const hashPassword = bcrypt.hashSync(request.body.password, 10);
@@ -33,7 +33,7 @@ export class UserModels {
             throw new Error(`Couldn't add ${request.body.first_name} ${request.body.last_name}} because Error: ${error}`)
         }
     }
-    
+
     // #=======================================================================================#
     // #			                            login                                          #
     // #=======================================================================================#
@@ -69,7 +69,7 @@ export class UserModels {
     // #=======================================================================================#
     // #			                       get User by id                                      #
     // #=======================================================================================#
-    async getUserByID(request: Request): Promise<users> {
+    async show(request: Request): Promise<users> {
         validateRequest(request);
         try {
             let sqlQuery = 'SELECT * FROM users WHERE id=($1)'
@@ -85,6 +85,29 @@ export class UserModels {
             return user;
         } catch (error) {
             throw new Error(`Couldn't find user with this id = ${request.params.id} because Error: ${error}`)
+        }
+    }
+    // #=======================================================================================#
+    // #			                         get all User                                      #
+    // #=======================================================================================#
+    async index(request: Request): Promise<users[]> {
+        validateRequest(request);
+        try {
+            let sqlQuery = 'SELECT * FROM users'
+            const DBConnection = await Client.connect()
+            const result = await DBConnection.query(sqlQuery)
+            console.log(result.rows);
+            const user = result.rows;
+
+            DBConnection.release();
+
+            if (!user) {
+                throw new Error('No users to show')
+            }
+
+            return user;
+        } catch (error) {
+            throw new Error(`Couldn't find users because Error: ${error}`)
         }
     }
 
