@@ -22,24 +22,30 @@ npm i
 
 ## EndPints
 
-#### user
+<h4 align="center">user</h4>
 
-`LOGIN` route: 'user/login' [POST]  
-`CREATE` new user route: 'user/create' [POST]  
-`INDEX` get all users route: 'user/Index' [GET]  
-`SHOW` user by ID route: 'user/show/:id' [GET]  
+```bash
+`LOGIN` route: 'user/login' [POST]
+`CREATE` new user route: 'user/create' [POST]
+`INDEX` get all users route: 'user/Index' [GET]
+`SHOW` user by ID route: 'user/show/:id' [GET]
 `LOGOUT` new user route: 'user/logout/:id' [POST]
+```
 
-### product
+<h4 align="center">product</h4>
 
-`CREATE` new product route: 'product/create' [POST]  
-`INDEX` to get all products route: 'product/Index' [GET]  
+```bash
+`CREATE` new product route: 'product/create' [POST]
+`INDEX` to get all products route: 'product/Index' [GET]
 `SHOW` product by ID route: 'product/show/:id' [GET]
+```
 
-### order
+<h4 align="center">order</h4>
 
-`CREATE` new order route: 'order/create' [POST]  
+```bash
+`CREATE` new order route: 'order/create' [POST]
 `SHOW` all user order route: 'order/show/:id' [GET]
+```
 
 ## Folder Structure
 
