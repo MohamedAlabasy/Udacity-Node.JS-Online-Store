@@ -38,9 +38,7 @@ npm i
 │   │
 │   ├── models
 │   │   ├── tests
-│   │   │   │── ordersTest.ts => `for handle orders test`
-│   │   │   │── productTest.ts => `for handle product test`
-│   │   │   └── userTest.ts => `for handle user test`
+│   │   │   └── endPointTests.ts => `for handle user test`
 │   │   ├── ordersModels.ts => `for handel email orders Models and functions used in handler`
 │   │   │── productModels.ts => `for handel reset product Models and functions used in handler`
 │   │   └── userModels.ts => `for handel user Models and functions used in handler`
