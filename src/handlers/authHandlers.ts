@@ -66,3 +66,19 @@ export const getUserByID = async (request: Request, response: Response, next: Ne
             next(error)
         })
 }
+
+// #=======================================================================================#
+// #			                            logout                                         #
+// #=======================================================================================#
+export const logout = async (request: Request, response: Response, next: NextFunction) => {
+    validateRequest(request);
+    await newUser.logout(request.params.id)
+        .then(_ => {
+            response.json({
+                status: 1,
+                data: 'logout successful'
+            })
+        }).catch(error => {
+            next(error)
+        })
+}

@@ -82,4 +82,26 @@ export class UserModels {
             throw new Error(`Couldn't find user with this id =${id} because Error: ${error}`)
         }
     }
+
+    // #=======================================================================================#
+    // #			                               logout                                      #
+    // #=======================================================================================#
+    async logout(id: string): Promise<users> {
+        try {
+            let sqlQuery = 'UPDATE users SET token = null WHERE id=($1)'
+            const DBConnection = await Client.connect()
+            const result = await DBConnection.query(sqlQuery, [id]);
+            const user = result.rows[0]
+            DBConnection.release();
+
+            if (user === null) {
+                throw new Error(`No user with this id = ${id}`)
+            }
+
+            return user;
+        } catch (error) {
+            throw new Error(`Couldn't find user with this id =${id} because Error: ${error}`)
+        }
+    }
+
 }
