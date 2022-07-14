@@ -7,6 +7,7 @@ import morganMiddleware from './middleware/morganMiddleware';
 import notFoundMiddleware from './middleware/notFoundMiddleware';
 import errorMiddleware from './middleware/errorMiddleware';
 
+import routes from './routes/routes';
 
 const app = express();
 // #=======================================================================================#
@@ -24,7 +25,10 @@ app.use(body_parser.urlencoded({ extended: false }));
 // #			                     add header or use cors                                #
 // #=======================================================================================#
 app.use(cors());
-
+// #=======================================================================================#
+// #			                            router                                         #
+// #=======================================================================================#
+app.use('', morganMiddleware, routes);
 // #=======================================================================================#
 // #			                      not Found middleware                                 #
 // #=======================================================================================#
