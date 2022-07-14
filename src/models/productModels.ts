@@ -11,14 +11,14 @@ export type product = {
     category_id: number,
 }
 
-export class UserModels {
+export class ProductModels {
     // #=======================================================================================#
     // #			                              create                                       #
     // #=======================================================================================#
     async create(request: Request): Promise<product> {
         validateRequest(request);
         try {
-            const sqlQuery = 'INSERT INTO users (name,price, category_id) VALUES($1, $2, $3) RETURNING *'
+            const sqlQuery = 'INSERT INTO products (name,price, category_id) VALUES($1, $2, $3) RETURNING *'
             const DBConnection = await Client.connect()
             const result = await DBConnection.query(sqlQuery, [request.body.name, request.body.price, request.body.category_id])
             const user = result.rows[0]
@@ -34,19 +34,19 @@ export class UserModels {
     async show(request: Request): Promise<product> {
         validateRequest(request);
         try {
-            let sqlQuery = 'SELECT * FROM users WHERE id=($1)'
+            let sqlQuery = 'SELECT * FROM products WHERE id=($1)'
             const DBConnection = await Client.connect()
             const result = await DBConnection.query(sqlQuery, [request.params.id])
             const user = result.rows[0]
             DBConnection.release();
 
             if (!user) {
-                throw new Error(`No user with this id = ${request.params.id}`)
+                throw new Error(`No product with this id = ${request.params.id}`)
             }
 
             return user;
         } catch (error) {
-            throw new Error(`Couldn't find user with this id = ${request.params.id} because Error: ${error}`)
+            throw new Error(`Couldn't find product with this id = ${request.params.id} because Error: ${error}`)
         }
     }
     // #=======================================================================================#
@@ -55,7 +55,7 @@ export class UserModels {
     async index(request: Request): Promise<product[]> {
         validateRequest(request);
         try {
-            let sqlQuery = 'SELECT * FROM users'
+            let sqlQuery = 'SELECT * FROM products'
             const DBConnection = await Client.connect()
             const result = await DBConnection.query(sqlQuery)
             console.log(result.rows);
@@ -64,12 +64,12 @@ export class UserModels {
             DBConnection.release();
 
             if (!user) {
-                throw new Error('No users to show')
+                throw new Error('No products to show')
             }
 
             return user;
         } catch (error) {
-            throw new Error(`Couldn't find users because Error: ${error}`)
+            throw new Error(`Couldn't find products because Error: ${error}`)
         }
     }
 }
