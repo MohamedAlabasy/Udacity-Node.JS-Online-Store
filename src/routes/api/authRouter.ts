@@ -1,12 +1,14 @@
 import { Router } from 'express';
 
 import {
-    test
+    create,
+    show
 } from '../../handlers/authHandlers'
 
 const auth: Router = Router()
 
-auth.get('/', test)
+auth.get('', show);
+auth.post('', create);
 
 
 export default auth;
