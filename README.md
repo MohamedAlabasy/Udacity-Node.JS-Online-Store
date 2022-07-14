@@ -2,8 +2,7 @@
 
 ## Description:
 
-Simple Task Management Tool has the following Lists ( TODO – IN progress – Under review – Rework - Completed )
-which can be Create Read Update Delete and move Task from List to another List.
+The goal of the project is to create an online store, users can create their personal accounts on the site, they can browse the existing products, and can add these products to the basket with numbers in order to buy them.
 
 ## To run this project
 
