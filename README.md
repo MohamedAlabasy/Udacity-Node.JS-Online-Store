@@ -38,3 +38,36 @@ npm i
 ```
 node run watch
 ```
+`Step 4` : Open the browser and click : [http://localhost:8080](http://localhost:8080)
+
+`Step 5` : Open [postman](https://www.postman.com/downloads/) and import : [API Collation](https://github.com/MohamedAlabasy/Udacity-Node.JS-Online-Store/blob/main/api_collection.json) You will find it in the project file.
+
+<hr>
+To run eslint to check error
+
+```
+npm run lint
+```
+
+To run eslint and auto fixed error
+
+```
+npm run lint:f
+```
+
+To compile the TS code
+
+```
+npm run build
+```
+
+To run the JS code
+
+```
+node dist/index.js
+```
+
+<hr>
+
+Here are the [Command](https://github.com/MohamedAlabasy/Udacity-Node.JS-Online-Store/blob/main/command.txt) that were used in the project, You will find it in the project file.
+
