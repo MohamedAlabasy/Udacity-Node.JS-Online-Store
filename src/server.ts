@@ -20,7 +20,6 @@ app.use(body_parser.urlencoded({ extended: false }));
 // #=======================================================================================#
 // #			                     add header or use cors                                #
 // #=======================================================================================#
-// app.use(headerAccessMiddleware);
 app.use(cors());
 
 export default app;
