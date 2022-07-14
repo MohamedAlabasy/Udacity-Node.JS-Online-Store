@@ -235,7 +235,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"name\":\"name\",\r\n\"price\":465465,\r\n\"category_id\":1\r\n}",
+							"raw": "{\r\n\"name\":\"chocolate\",\r\n\"price\":20,\r\n\"category_id\":1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -263,7 +263,7 @@
 			]
 		},
 		{
-			"name": "User",
+			"name": "users",
 			"item": [
 				{
 					"name": "get user by id",
@@ -359,10 +359,10 @@
 			]
 		},
 		{
-			"name": "products Copy",
+			"name": "orders",
 			"item": [
 				{
-					"name": "get all product by id",
+					"name": "get all order by id",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
