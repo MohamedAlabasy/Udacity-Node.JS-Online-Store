@@ -134,9 +134,5 @@ dist
 *.jpg
 *.jpeg
 
-# except
-!background.jpg
-
 #REQUIREMENTS
-ppp.txt
 REQUIREMENTS.md
