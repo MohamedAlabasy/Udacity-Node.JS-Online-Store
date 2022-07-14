@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 
 import Client from '../database';
 
-
 export type users = {
     id: number,
     email: string,
@@ -14,12 +13,15 @@ export type users = {
 }
 
 export class UserModels {
-    async create(newUser: users): Promise<users> {
+    // #=======================================================================================#
+    // #			                            Register                                       #
+    // #=======================================================================================#
+    async register(newUser: users): Promise<users> {
         try {
             const hashPassword = bcrypt.hashSync(newUser.password, 10);
             const sqlQuery = 'INSERT INTO users (email,first_name, last_name, password,token) VALUES($1, $2, $3,$4,null) RETURNING *'
             const DBConnection = await Client.connect()
-            const result = await DBConnection.query(sqlQuery, [newUser.email, newUser.first_name, newUser.last_name, hashPassword])
+            const result = await DBConnection.query(sqlQuery, [newUser.email.toLocaleLowerCase(), newUser.first_name, newUser.last_name, hashPassword])
             const user = result.rows[0]
             DBConnection.release()
             return user
@@ -28,17 +30,36 @@ export class UserModels {
         }
     }
 
-
-    async index(): Promise<users[]> {
+    // #=======================================================================================#
+    // #			                            login                                          #
+    // #=======================================================================================#
+    async login(newUser: users): Promise<users> {
         try {
-            const conn = await Client.connect() //start connection
-            const sql = 'SELECT * FROM users' //query
-            const result = await conn.query(sql) //set query on DB
-            conn.release() //close connection
-            return result.rows; //return result
-        }
-        catch (error) {
-            throw Error(`database error : ${error}`)
+            let sqlQuery = 'SELECT * FROM users WHERE email=($1)'
+            const DBConnection = await Client.connect()
+            const result = await DBConnection.query(sqlQuery, [newUser.email.toLocaleLowerCase()])
+            let user = result.rows[0]
+
+            if (user === null) {
+                throw new Error(`No user with this email = ${newUser.email}`)
+            }
+
+            let IsValidPassword = bcrypt.compareSync(newUser.password, user.password);
+            if (!IsValidPassword) {
+                throw new Error(`invalid password`)
+            } else {
+                // to add token to router
+                user.token = jwt.sign({ id: user._id, email: user.email }, process.env.ACCESS_TOKEN_SECRET as string, {
+                    expiresIn: 86400 //for 24 hour
+                });
+                sqlQuery = 'UPDATE users SET token = ($1) WHERE email=($2)'
+                await DBConnection.query(sqlQuery, [user.token, user.id]);
+            }
+            DBConnection.release();
+            return user;
+        } catch (error) {
+            throw new Error(`Couldn't add ${newUser.first_name} ${newUser.last_name}} because Error: ${error}`)
         }
     }
+
 }

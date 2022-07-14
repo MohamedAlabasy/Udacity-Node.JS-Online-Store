@@ -1,34 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
-import { users, UserModels } from '../models/userModels'
+import { UserModels } from '../models/userModels'
 
 import validateRequest from '../utilities/validateRequest';
 
 const newUser = new UserModels()
-
 // #=======================================================================================#
-// #			                            login                                          #
+// #			                            Register                                       #
 // #=======================================================================================#
-
-
-export const show = async (request: Request, response: Response, next: NextFunction) => {
-    const worlds = await newUser.index()
-    response.json({
-        status: 1,
-        data: worlds
-    })
-}
-
-
-// #=======================================================================================#
-// #			                            login                                          #
-// #=======================================================================================#
-export const login = async (request: Request, response: Response, next: NextFunction) => {
+export const register = async (request: Request, response: Response, next: NextFunction) => {
     validateRequest(request);
-    await newUser.create(request.body)
+    await newUser.register(request.body)
         .then(userData => {
             response.json({
                 status: 1,
-                token: userData.token,
                 data: {
                     id: userData.id,
                     email: userData.email,
@@ -40,16 +24,16 @@ export const login = async (request: Request, response: Response, next: NextFunc
             next(error)
         })
 }
-
 // #=======================================================================================#
-// #			                            Register                                       #
+// #			                            login                                          #
 // #=======================================================================================#
-export const register = async (request: Request, response: Response, next: NextFunction) => {
+export const login = async (request: Request, response: Response, next: NextFunction) => {
     validateRequest(request);
-    await newUser.create(request.body)
+    await newUser.login(request.body)
         .then(userData => {
             response.json({
                 status: 1,
+                token: userData.token,
                 data: {
                     id: userData.id,
                     email: userData.email,
