@@ -20,6 +20,27 @@ npm i
 
 <h3 align="center">To help you understand the project</h3>
 
+## EndPints
+
+### user
+
+LOGIN route: 'user/login' [POST]
+CREATE new user route: 'user/create' [POST]
+INDEX get all users route: 'user/Index' [GET]
+SHOW user by ID route: 'user/show/:id' [GET]
+LOGOUT new user route: 'user/logout/:id' [POST]
+
+### product
+
+CREATE new product route: 'product/create' [POST]
+INDEX to get all products route: 'product/Index' [GET]
+SHOW product by ID route: 'product/show/:id' [GET]
+
+### order
+
+CREATE new order route: 'order/create' [POST]
+SHOW all user order route: 'order/show/:id' [GET]
+
 ## Folder Structure
 
 ```bash
