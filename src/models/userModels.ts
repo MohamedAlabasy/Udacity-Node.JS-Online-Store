@@ -30,7 +30,7 @@ export class UserModels {
             DBConnection.release()
             return user
         } catch (error) {
-            throw new Error(`Couldn't add ${request.body.first_name} ${request.body.last_name}} because Error: ${error}`)
+            throw new Error(`Couldn't add ${request.body.first_name} ${request.body.last_name} because Error: ${error}`)
         }
     }
 

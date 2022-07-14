@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { UserModels } from '../models/userModels'
 
-import validateRequest from '../utilities/validateRequest';
 
 const newUser = new UserModels()
 // #=======================================================================================#
