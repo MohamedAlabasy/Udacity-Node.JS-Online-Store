@@ -2,5 +2,5 @@
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     status enum('active' or 'complete'),
-    quantity integer 
+    quantity integer NOT NULL
 );
