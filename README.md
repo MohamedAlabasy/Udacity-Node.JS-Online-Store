@@ -30,7 +30,7 @@ npm i
 
 ## DataBase ERD
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/93389016/178996031-d68bae34-77d9-42d4-ac79-6f2f27cf59ef.jpg" alt="Build Status">
+   <img src="https://user-images.githubusercontent.com/93389016/179008076-22e1d528-6be5-4808-9c76-d61ec9c767ba.jpg" alt="Build Status">
 </p>
 
 `Step 3` : To run project
