@@ -2,7 +2,7 @@
 
 ## Description:
 
-The goal of the project is to create an online store, users can create their personal accounts on the site, they can browse the existing products, and can add these products to the basket with numbers in order to buy them.
+The goal of the project is to create an online store, users can create their personal accounts on the site, they can browse the existing products, and can add these products to the card with numbers in order to buy them.
 
 ## To run this project
 
