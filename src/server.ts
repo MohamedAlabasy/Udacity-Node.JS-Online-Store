@@ -3,6 +3,9 @@ import 'dotenv/config'
 import body_parser from 'body-parser';
 import cors from 'cors';
 
+import morganMiddleware from './middleware/morganMiddleware';
+import notFoundMiddleware from './middleware/notFoundMiddleware';
+import errorMiddleware from './middleware/errorMiddleware';
 
 
 const app = express();
@@ -21,5 +24,15 @@ app.use(body_parser.urlencoded({ extended: false }));
 // #			                     add header or use cors                                #
 // #=======================================================================================#
 app.use(cors());
+
+// #=======================================================================================#
+// #			                      not Found middleware                                 #
+// #=======================================================================================#
+app.use(notFoundMiddleware);
+// #=======================================================================================#
+// #			                          middleware                                       #
+// #=======================================================================================#
+app.use(errorMiddleware);
+
 
 export default app;
