@@ -1,7 +1,12 @@
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
 import Client from '../database';
+
 
 export type users = {
     id: number,
+    email: string,
     first_name: string,
     last_name: string,
     password: string,
@@ -9,19 +14,17 @@ export type users = {
 }
 
 export class UserModels {
-    // async create(newUser: users): Promise<users> {
-    async create(): Promise<users> {
+    async create(newUser: users): Promise<users> {
         try {
-            const sqlQuery = 'INSERT INTO users (first_name, last_name, password,token) VALUES($1, $2, $3,null) RETURNING *'
-            const conn = await Client.connect()
-            const result = await conn.query(sqlQuery, ['Mohamed', 'Alabasy', '123456asd'])
+            const hashPassword = bcrypt.hashSync(newUser.password, 10);
+            const sqlQuery = 'INSERT INTO users (email,first_name, last_name, password,token) VALUES($1, $2, $3,$4,null) RETURNING *'
+            const DBConnection = await Client.connect()
+            const result = await DBConnection.query(sqlQuery, [newUser.email, newUser.first_name, newUser.last_name, hashPassword])
             const user = result.rows[0]
-            conn.release()
-
+            DBConnection.release()
             return user
         } catch (error) {
-            throw new Error(`DB Error: ${error}`)
-            // throw new Error(`Couldn't add ${newUser.first_name} ${newUser.last_name}} because Error: ${error}`)
+            throw new Error(`Couldn't add ${newUser.first_name} ${newUser.last_name}} because Error: ${error}`)
         }
     }
 
