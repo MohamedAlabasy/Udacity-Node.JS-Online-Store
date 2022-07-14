@@ -21,9 +21,9 @@ export class ProductModels {
             const sqlQuery = 'INSERT INTO products (name,price, category_id) VALUES($1, $2, $3) RETURNING *'
             const DBConnection = await Client.connect()
             const result = await DBConnection.query(sqlQuery, [request.body.name, request.body.price, request.body.category_id])
-            const user = result.rows[0]
+            const product = result.rows[0]
             DBConnection.release()
-            return user
+            return product
         } catch (error) {
             throw new Error(`Couldn't add ${request.body.name} because Error: ${error}`)
         }
@@ -37,20 +37,20 @@ export class ProductModels {
             let sqlQuery = 'SELECT * FROM products WHERE id=($1)'
             const DBConnection = await Client.connect()
             const result = await DBConnection.query(sqlQuery, [request.params.id])
-            const user = result.rows[0]
+            const product = result.rows[0]
             DBConnection.release();
 
-            if (!user) {
+            if (!product) {
                 throw new Error(`No product with this id = ${request.params.id}`)
             }
 
-            return user;
+            return product;
         } catch (error) {
             throw new Error(`Couldn't find product with this id = ${request.params.id} because Error: ${error}`)
         }
     }
     // #=======================================================================================#
-    // #			                         get all User                                      #
+    // #			                         get all product                                   #
     // #=======================================================================================#
     async index(request: Request): Promise<product[]> {
         validateRequest(request);
@@ -59,15 +59,15 @@ export class ProductModels {
             const DBConnection = await Client.connect()
             const result = await DBConnection.query(sqlQuery)
             console.log(result.rows);
-            const user = result.rows;
+            const product = result.rows;
 
             DBConnection.release();
 
-            if (!user) {
+            if (!product) {
                 throw new Error('No products to show')
             }
 
-            return user;
+            return product;
         } catch (error) {
             throw new Error(`Couldn't find products because Error: ${error}`)
         }

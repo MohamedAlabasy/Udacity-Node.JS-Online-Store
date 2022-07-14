@@ -12,7 +12,7 @@ export type orders = {
     user_id: number,
 }
 
-export class ProductModels {
+export class OrderModels {
     // #=======================================================================================#
     // #			                              create                                       #
     // #=======================================================================================#
@@ -22,9 +22,9 @@ export class ProductModels {
             const sqlQuery = 'INSERT INTO orders (status,quantity, product_id,user_id) VALUES($1, $2, $3, $4) RETURNING *'
             const DBConnection = await Client.connect()
             const result = await DBConnection.query(sqlQuery, [request.body.status, request.body.quantity, request.body.product_id, request.body.user_id])
-            const user = result.rows[0]
+            const order = result.rows[0]
             DBConnection.release()
-            return user
+            return order
         } catch (error) {
             throw new Error(`Couldn't add ${request.body.name} because Error: ${error}`)
         }
@@ -38,16 +38,15 @@ export class ProductModels {
             let sqlQuery = 'SELECT * FROM orders where user_id=($1)'
             const DBConnection = await Client.connect()
             const result = await DBConnection.query(sqlQuery, [request.body.user_id])
-            console.log(result.rows);
-            const user = result.rows;
+            const order = result.rows;
 
             DBConnection.release();
 
-            if (!user) {
+            if (!order) {
                 throw new Error(`No orders to show for user ${request.body.user_id}`)
             }
 
-            return user;
+            return order;
         } catch (error) {
             throw new Error(`Couldn't find orders show for user ${request.body.user_id} because Error: ${error}`)
         }
