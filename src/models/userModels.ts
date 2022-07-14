@@ -122,14 +122,10 @@ export class UserModels {
             const result = await DBConnection.query(sqlQuery, [request.params.id]);
             const user = result.rows[0]
             DBConnection.release();
-
-            if (!user) {
-                throw new Error(`No user with this id = ${request.params.id}`)
-            }
-
             return user;
+
         } catch (error) {
-            throw new Error(`Couldn't find user with this id =${request.params.id} because Error: ${error}`)
+            throw new Error(`Couldn't find user with this id = ${request.params.id} because Error: ${error}`)
         }
     }
 }
