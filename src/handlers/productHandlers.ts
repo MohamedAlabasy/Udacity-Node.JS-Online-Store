@@ -33,7 +33,7 @@ export const show = async (request: Request, response: Response, next: NextFunct
                 data: {
                     id: productData.id,
                     name: productData.name,
-                    price: productData.price,
+                    price: productData.price + " $",
                     category_id: productData.category_id,
                 }
             })
