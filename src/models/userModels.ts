@@ -96,7 +96,6 @@ export class UserModels {
             let sqlQuery = 'SELECT * FROM users'
             const DBConnection = await Client.connect()
             const result = await DBConnection.query(sqlQuery)
-            console.log(result.rows);
             const user = result.rows;
 
             DBConnection.release();

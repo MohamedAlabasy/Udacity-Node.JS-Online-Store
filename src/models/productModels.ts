@@ -58,7 +58,6 @@ export class ProductModels {
             let sqlQuery = 'SELECT * FROM products'
             const DBConnection = await Client.connect()
             const result = await DBConnection.query(sqlQuery)
-            console.log(result.rows);
             const product = result.rows;
 
             DBConnection.release();
