@@ -1,13 +1,12 @@
 import { Router } from 'express';
 
+import {
+    test
+} from '../../handlers/authHandlers'
 
 const auth: Router = Router()
 
-auth.get('/', (request, response, next) => {
-    response.json({
-        msg: 'hello'
-    })
-})
+auth.get('/', test)
 
 
 export default auth;
