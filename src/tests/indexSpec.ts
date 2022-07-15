@@ -1,5 +1,5 @@
 import supertest, { SuperTest, Test, Response } from 'supertest';
-import app from '../../server'
+import app from '../server'
 
 
 const request: SuperTest<Test> = supertest(app);
