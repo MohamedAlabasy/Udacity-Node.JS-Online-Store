@@ -26,7 +26,7 @@ export const create = async (request: Request, response: Response, next: NextFun
 // #=======================================================================================#
 // #			                        get all orders product                             #
 // #=======================================================================================#
-export const getAllUserOrder = async (request: Request, response: Response, next: NextFunction) => {
+export const getAllOrderProducts = async (request: Request, response: Response, next: NextFunction) => {
     await newOrderProduct.getAllOrderProducts(request)
         .then(orderData => {
             response.json({

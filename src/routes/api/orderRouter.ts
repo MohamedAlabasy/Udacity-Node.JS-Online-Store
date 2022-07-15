@@ -18,7 +18,7 @@ order.get('/show/:user_id', checkTokens, checkID(), getAllUserOrder);
 // #=======================================================================================#
 function checkID() {
     return [
-        param("user_id").exists().withMessage('you must enter order id').isInt().withMessage('invalid order id')
+        param("user_id").exists().withMessage('you must enter user id').isInt().withMessage('invalid user id')
     ]
 }
 
