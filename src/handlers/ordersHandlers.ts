@@ -14,9 +14,7 @@ export const create = async (request: Request, response: Response, next: NextFun
                 data: {
                     id: orderData.id,
                     status: orderData.status,
-                    quantity: orderData.quantity,
                     user_id: orderData.user_id,
-                    product_i: orderData.product_id
                 }
             })
         }).catch(error => {
@@ -37,9 +35,7 @@ export const getAllUserOrder = async (request: Request, response: Response, next
                     return {
                         id: data.id,
                         status: data.status,
-                        quantity: data.quantity,
                         user_id: data.user_id,
-                        product_i: data.product_id
                     }
                 })
             })
