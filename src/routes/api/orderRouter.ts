@@ -4,14 +4,13 @@ import { body, param } from 'express-validator';
 import {
     create,
     getAllUserOrder
-
 } from '../../handlers/ordersHandlers'
 import checkTokens from '../../utilities/checkTokens';
 
 const order: Router = Router()
 
 order.post('/create', checkProductData(), create);
-order.get('/show/:id', checkTokens, checkID(), getAllUserOrder);
+order.get('/show/:user_id', checkTokens, checkID(), getAllUserOrder);
 
 
 // #=======================================================================================#
@@ -19,7 +18,7 @@ order.get('/show/:id', checkTokens, checkID(), getAllUserOrder);
 // #=======================================================================================#
 function checkID() {
     return [
-        param("id").exists().withMessage('you must enter order id').isInt().withMessage('invalid order id')
+        param("user_id").exists().withMessage('you must enter order id').isInt().withMessage('invalid order id')
     ]
 }
 

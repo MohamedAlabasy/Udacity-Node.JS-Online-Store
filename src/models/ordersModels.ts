@@ -33,20 +33,21 @@ export class OrderModels {
     async getAllUserOrder(request: Request): Promise<orders[]> {
         validateRequest(request);
         try {
-            let sqlQuery = 'SELECT * FROM orders where user_id=($1)'
+            let sqlQuery = 'SELECT * FROM orders where user_id = ($1)'
             const DBConnection = await Client.connect()
-            const result = await DBConnection.query(sqlQuery, [request.body.user_id])
+            const result = await DBConnection.query(sqlQuery, [request.params.user_id])
             const order = result.rows;
-
             DBConnection.release();
 
+
             if (!order) {
-                throw new Error(`No orders to show for user ${request.body.user_id}`)
+                throw new Error(`No orders to show for user ${request.params.user_id}`)
             }
+
 
             return order;
         } catch (error) {
-            throw new Error(`Couldn't find orders show for user ${request.body.user_id} because Error: ${error}`)
+            throw new Error(`Couldn't find orders show for user ${request.params.user_id} because Error: ${error}`)
         }
     }
 }
