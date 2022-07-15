@@ -29,14 +29,6 @@ function checkProductData() {
             .exists().withMessage('you must enter name')
             .isIn(['active', 'complete']).withMessage('priority must be in active or complete'),
 
-        // body('quantity')
-        //     .exists().withMessage('you must enter quantity')
-        //     .isInt().withMessage('invalid quantity'),
-
-        // body('product_id')
-        //     .exists().withMessage('you must enter product_id')
-        //     .isInt().withMessage('invalid product_id'),
-
         body('user_id')
             .exists().withMessage('you must enter user_id')
             .isInt().withMessage('invalid user_id'),

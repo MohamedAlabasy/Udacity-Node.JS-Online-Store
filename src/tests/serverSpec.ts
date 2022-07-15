@@ -75,15 +75,30 @@ describe('check Endpoint API', (): void => {
             const response: Response = await request.post('/order/create')
                 .send({
                     "status": "active",
-                    "quantity": 2,
-                    "product_id": 1,
                     "user_id": 1
                 })
             expect(response.status).toBe(200);
         });
 
-        it('GET /order/show/id', async (): Promise<void> => {
+        it('GET /order/show/user_id', async (): Promise<void> => {
             const response: Response = await request.get('/order/show/1')
+            expect(response.status).toBe(200);
+        });
+    });
+
+    describe('check order product Endpoint', (): void => {
+        it('POST /orderProduct/create', async (): Promise<void> => {
+            const response: Response = await request.post('/orderProduct/create')
+                .send({
+                    "quantity": 15,
+                    "product_id": 1,
+                    "order_id": 1
+                })
+            expect(response.status).toBe(200);
+        });
+
+        it('GET /orderProduct/show/order_id', async (): Promise<void> => {
+            const response: Response = await request.get('/orderProduct/show/1')
             expect(response.status).toBe(200);
         });
     });
