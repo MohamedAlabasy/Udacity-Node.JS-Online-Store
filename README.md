@@ -92,7 +92,7 @@ npm i
 ## DataBase ERD
 
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/93389016/179023965-33ba66fa-e4ff-4b53-8025-380c0dec9114.jpg" alt="Build Status">
+   <img src="https://user-images.githubusercontent.com/93389016/179218031-acf562c7-65e1-4617-b0cb-3b577cb2ef92.jpg" alt="Build Status">
 
 `Step 3` : To run project
 
