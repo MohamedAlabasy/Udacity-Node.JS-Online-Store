@@ -44,7 +44,14 @@ npm i
 
 ```bash
 `CREATE` new order route: 'order/create' [POST]
-`SHOW` all user order route: 'order/show/:id' [GET]
+`SHOW` all user order route: 'order/show/:user_id' [GET]
+```
+
+<h4 align="center">order product</h4>
+
+```bash
+`CREATE` new order route: 'orderProduct/create' [POST]
+`SHOW` all user order route: 'orderProduct/show/:order_id' [GET]
 ```
 
 ## Folder Structure
@@ -53,6 +60,7 @@ npm i
 ├── src
 │   ├── handlers
 │   │   ├── authHandlers.ts => `for handel authentication function`
+│   │   ├── orderProductsHandlers.ts => `for handel orders product function`
 │   │   ├── ordersHandlers.ts => `for handel orders function`
 │   │   └── productHandlers.ts => `for handel product function`
 │   │
@@ -64,19 +72,25 @@ npm i
 │   │
 │   │
 │   ├── models
-│   │   ├── tests
-│   │   │   └── endPointTests.ts => `for handle user test`
-│   │   ├── ordersModels.ts => `for handel email orders Models and functions used in handler`
-│   │   │── productModels.ts => `for handel reset product Models and functions used in handler`
+│   │   ├── ordersModels.ts => `for handel orders Models and functions used in handler`
+│   │   ├── orderProductsModels.ts => `for handel orders product Models and functions used in handler`
+│   │   │── productModels.ts => `for handel product Models and functions used in handler`
 │   │   └── userModels.ts => `for handel user Models and functions used in handler`
 │   │
 │   │
 │   ├── routes
 │   │   ├── api
 │   │   │   │── authRouter.ts => `for handel authentication route`
+│   │   │   │── orderProductsRouter.ts => `for handel order products route`
 │   │   │   │── orderRouter.ts => `for handel order route`
 │   │   │   └── productRouter.ts => `for handel product route`
 │   │   └── routes.ts => `import all routes and exports it to index`
+│   │
+│   │
+│   ├── tests => `for testing purposes`
+│   │   ├── helpers
+│   │   │   └── reporter.ts
+│   │   └── serverSpec.ts => `for testing endpoint api`
 │   │
 │   │
 │   ├── utilities
