@@ -57,7 +57,8 @@ export class UserModels {
                 user.token = jwt.sign({ id: user._id, email: user.email }, process.env.ACCESS_TOKEN_SECRET as string, {
                     expiresIn: 86400 //for 24 hour
                 });
-                sqlQuery = 'UPDATE users SET token = ($1) WHERE email=($2)'
+
+                sqlQuery = 'UPDATE users SET token = ($1) WHERE id=($2)'
                 await DBConnection.query(sqlQuery, [user.token, user.id]);
             }
             DBConnection.release();

@@ -134,13 +134,19 @@ npm run lint:f
 To compile the TS code
 
 ```
-npm run build
+npm run tsc
 ```
 
 To run the JS code
 
 ```
-node dist/index.js
+node dist/server.js
+```
+
+To run test
+
+```
+npm run tests
 ```
 
 <hr>
