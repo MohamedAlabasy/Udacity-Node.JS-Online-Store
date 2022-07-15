@@ -29,7 +29,7 @@ export class orderProductsModels {
         }
     }
     // #=======================================================================================#
-    // #			                        get all orders product                              #
+    // #			                        get all orders product                             #
     // #=======================================================================================#
     async getAllOrderProducts(request: Request): Promise<orderProducts[]> {
         validateRequest(request);
